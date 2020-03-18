@@ -6,7 +6,7 @@ import android.util.DisplayMetrics
 fun Int.convertToPx(context: Context) =
     (this * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
 
-fun Int.convertToDp(context: Context) =
+fun Int.convertToDp(contefxt: Context) =
     (this / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
 
 fun Float.convertToPx(context: Context) =
