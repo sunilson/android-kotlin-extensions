@@ -4,4 +4,4 @@ This library contains the most essential extension functions that I will use in 
 
 ## Usage
 
-TODO
+`implementation 'com.github.sunilson:android-kotlin-extensions:Version'`
