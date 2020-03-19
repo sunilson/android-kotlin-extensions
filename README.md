@@ -4,4 +4,13 @@ This library contains the most essential extension functions that I will use in 
 
 ## Usage
 
+`
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+`
+
 `implementation 'com.github.sunilson:android-kotlin-extensions:Version'`
