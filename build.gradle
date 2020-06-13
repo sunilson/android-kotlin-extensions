@@ -28,7 +28,7 @@ allprojects {
 }
 
 dependencies {
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.6.0")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.7.4")
 }
 
 task clean(type: Delete) {
