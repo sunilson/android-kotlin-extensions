@@ -7,17 +7,4 @@
 
 
 
-TODO
-
-## Usage
-
-```
-allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
-```
-
-`implementation 'com.github.sunilson:android-kotlin-extensions:Version'`
+Personal library that contains useful Kotlin extension functions mainly for the Android SDK. Will be updated alongside my personal projects and is hosted on Jitpack (see Badge)
