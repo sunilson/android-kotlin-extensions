@@ -25,16 +25,29 @@ fun Fragment.setNavigationBarColor(@ColorRes color: Int, receiver: Window? = act
     }
 }
 
-fun Fragment.drawBelowStatusBar(receiver: Window? = requireActivity().window) {
+fun Fragment.drawBelowStatusBar(
+    enabled: Boolean = true,
+    receiver: Window? = requireActivity().window
+) {
     receiver?.decorView?.run {
-        systemUiVisibility =
+        systemUiVisibility = if (enabled) {
             systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        } else {
+            systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_STABLE and View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN.inv()
+        }
     }
 }
 
-fun Fragment.drawBelowNavigationBar(receiver: Window? = requireActivity().window) {
+fun Fragment.drawBelowNavigationBar(
+    enabled: Boolean = true,
+    receiver: Window? = requireActivity().window
+) {
     receiver?.decorView?.run {
-        systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        systemUiVisibility = if (enabled) {
+            systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        } else {
+            systemUiVisibility and View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION.inv()
+        }
     }
 }
 
