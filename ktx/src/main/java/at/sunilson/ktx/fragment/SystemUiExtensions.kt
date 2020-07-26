@@ -29,6 +29,10 @@ fun Fragment.drawBelowStatusBar(
     enabled: Boolean = true,
     receiver: Window? = requireActivity().window
 ) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        receiver?.setDecorFitsSystemWindows(true)
+    }
+
     receiver?.decorView?.run {
         systemUiVisibility = if (enabled) {
             systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -42,6 +46,10 @@ fun Fragment.drawBelowNavigationBar(
     enabled: Boolean = true,
     receiver: Window? = requireActivity().window
 ) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        receiver?.setDecorFitsSystemWindows(true)
+    }
+
     receiver?.decorView?.run {
         systemUiVisibility = if (enabled) {
             systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -51,15 +59,25 @@ fun Fragment.drawBelowNavigationBar(
     }
 }
 
+fun Fragment.drawFullscreen(
+    enabled: Boolean = true,
+    receiver: Window? = requireActivity().window
+) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        receiver?.setDecorFitsSystemWindows(!enabled)
+    } else {
+        drawBelowNavigationBar(enabled, receiver)
+        drawBelowStatusBar(enabled, receiver)
+    }
+}
+
 @RequiresApi(Build.VERSION_CODES.M)
 fun Fragment.useLightStatusBarIcons(light: Boolean, receiver: Window? = activity?.window) {
     receiver?.decorView?.run {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            systemUiVisibility = if (!light) {
-                systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            } else {
-                systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
-            }
+        systemUiVisibility = if (!light) {
+            systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        } else {
+            systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
         }
     }
 }
@@ -67,12 +85,10 @@ fun Fragment.useLightStatusBarIcons(light: Boolean, receiver: Window? = activity
 @RequiresApi(Build.VERSION_CODES.O)
 fun Fragment.useLightNavigationBarIcons(light: Boolean, receiver: Window? = activity?.window) {
     receiver?.decorView?.run {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            systemUiVisibility = if (!light) {
-                systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-            } else {
-                systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
-            }
+        systemUiVisibility = if (!light) {
+            systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+        } else {
+            systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
         }
     }
 }
