@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package at.sunilson.ktx.fragment
 
 import android.os.Build
