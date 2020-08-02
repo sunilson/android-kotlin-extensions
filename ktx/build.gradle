@@ -4,9 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 
-task packageSources(type: Jar, dependsOn: 'classes') {
-    from android.sourceSets.main
-    archiveClassifier.set('sources')
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
 }
 
 afterEvaluate {
@@ -21,7 +21,7 @@ afterEvaluate {
                 version = '0.38'
 
                 // Adds javadocs and sources as separate jars.
-                artifact packageSources
+                artifact sourceJar
             }
         }
     }
