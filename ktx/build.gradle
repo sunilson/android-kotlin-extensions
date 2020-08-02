@@ -51,6 +51,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    packagingOptions {
+        exclude 'META-INF/ktx_release.kotlin_module'
+    }
 }
 
 dependencies {
