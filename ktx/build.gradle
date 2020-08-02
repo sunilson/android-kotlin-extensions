@@ -2,24 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'maven-publish'
 
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.java.sourceFiles
-}
-
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.sourceFiles
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-task classesJar(type: Jar) {
-    from "$buildDir/intermediates/classes/release"
+task packageSources(type: Jar, dependsOn: 'classes') {
+    from android.sourceSets.main
+    archiveClassifier.set('sources')
 }
 
 afterEvaluate {
@@ -31,22 +18,10 @@ afterEvaluate {
 
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.github.sunilson'
-                artifactId = 'final'
-                version = '0.37'
-                artifact(classesJar)
-                artifact(sourcesJar)
-                artifact(javadocJar)
-                artifact("$buildDir/outputs/aar/bar-release.aar")
-            }
+                version = '0.38'
 
-            debug(MavenPublication) {
-                // Applies the component for the release build variant.
-                from components.debug
-
-                // You can then customize attributes of the publication as shown below.
-                groupId = 'com.github.sunilson'
-                artifactId = 'final'
-                version = '0.37'
+                // Adds javadocs and sources as separate jars.
+                artifact packageSources
             }
         }
     }
@@ -59,8 +34,8 @@ android {
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 8
-        versionName "0.37"
+        versionCode 9
+        versionName "0.38"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -73,7 +48,9 @@ android {
         }
     }
 
-    dataBinding.enabled = true
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
