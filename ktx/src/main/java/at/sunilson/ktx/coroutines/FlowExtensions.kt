@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
  * before it starts emitting.
  *
  * For 4 flows (A, B, C, D), emissions could look like this:
- * 
+ *
  * []
  * [A, C]
  * [A, C, D]
