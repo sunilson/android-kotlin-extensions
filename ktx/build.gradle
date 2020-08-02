@@ -18,7 +18,7 @@ afterEvaluate {
 
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.github.sunilson'
-                version = '0.39'
+                version = '0.41'
 
                 // Adds javadocs and sources as separate jars.
                 artifact sourceJar
@@ -34,8 +34,8 @@ android {
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 10
-        versionName "0.39"
+        versionCode 11
+        versionName "0.41"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -52,8 +52,8 @@ android {
         viewBinding true
     }
 
-    packagingOptions {
-        exclude 'META-INF/ktx_release.kotlin_module'
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += ['-module-name', "com.github.sunilson.android-kotlin-extensions"]
     }
 }
 
