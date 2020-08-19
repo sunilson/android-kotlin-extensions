@@ -7,4 +7,8 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun Long.toZonedDateTime(): ZonedDateTime = Instant.ofEpochMilli(this).atZone(ZoneId.systemDefault())
+fun Long.toZonedDateTime(): ZonedDateTime =
+    Instant.ofEpochMilli(this).atZone(ZoneId.systemDefault())
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun Instant.toZonedDateTime() = ZonedDateTime.from(this).withZoneSameInstant(ZoneId.systemDefault())
