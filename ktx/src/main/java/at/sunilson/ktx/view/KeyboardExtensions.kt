@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
 import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
-import androidx.core.app.ActivityCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 
 /**
  * See this blog post for more information [https://developer.squareup.com/blog/showing-the-android-keyboard-reliably]
