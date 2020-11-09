@@ -31,7 +31,7 @@ fun Fragment.setNavigationBarColor(@ColorRes color: Int, receiver: Window? = act
 /**
  * Draw below status and navigation bar
  */
-fun Fragment.edgeToEdge(enabled: Boolean, receiver: Window? = requireActivity().window) {
+fun Fragment.edgeToEdge(enabled: Boolean = true, receiver: Window? = requireActivity().window) {
     WindowCompat.setDecorFitsSystemWindows(receiver ?: return, !enabled)
 }
 
