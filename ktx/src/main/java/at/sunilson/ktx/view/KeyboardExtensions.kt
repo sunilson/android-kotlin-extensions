@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
 import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
-import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 
 /**

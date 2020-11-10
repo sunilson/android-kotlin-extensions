@@ -5,10 +5,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-import android.view.WindowManager
-import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 
 fun Window.edgeToEdge(enabled: Boolean = true) {
