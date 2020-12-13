@@ -18,7 +18,7 @@ afterEvaluate {
 
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.github.sunilson'
-                version = '0.53'
+                version = '0.54'
 
                 // Adds javadocs and sources as separate jars.
                 artifact sourceJar
@@ -34,8 +34,8 @@ android {
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 16
-        versionName "0.53"
+        versionCode 17
+        versionName "0.54"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'

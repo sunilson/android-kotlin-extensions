@@ -11,7 +11,7 @@ suspend fun <T, R> Iterable<T>.mapParallel(block: suspend (T) -> R): Iterable<R>
     map { async { block(it) } }.map { it.await() }
 }
 
-suspend fun doParallel(vararg blocks: suspend () -> Any) = coroutineScope {
+suspend fun doParallel(vararg blocks: suspend () -> Unit) = coroutineScope {
     blocks
         .map { async { it() } }
         .forEach { it.await() }
