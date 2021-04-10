@@ -7,6 +7,9 @@ import android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import androidx.annotation.RequiresApi
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import at.sunilson.ktx.view.showKeyboard
 
 fun Window.edgeToEdge(enabled: Boolean = true) {
     WindowCompat.setDecorFitsSystemWindows(this, !enabled)

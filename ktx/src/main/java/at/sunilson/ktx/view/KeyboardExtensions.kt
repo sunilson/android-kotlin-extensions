@@ -4,53 +4,28 @@ import android.content.Context
 import android.os.Build
 import android.view.View
 import android.view.ViewTreeObserver
+import android.view.Window
 import android.view.inputmethod.InputMethodManager
-import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
+import androidx.annotation.RequiresApi
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 
-/**
- * See this blog post for more information [https://developer.squareup.com/blog/showing-the-android-keyboard-reliably]
- */
+@RequiresApi(Build.VERSION_CODES.R)
 fun View.showKeyboard() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        windowInsetsController?.show(WindowInsetsCompat.Type.ime())
-        return
-    }
-
-    fun View.showTheKeyboardNow() {
-        if (isFocused) {
-            post {
-                val imm =
-                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-            }
-        }
-    }
-
-    requestFocus()
-    if (hasWindowFocus()) {
-        showTheKeyboardNow()
-    } else {
-        viewTreeObserver.addOnWindowFocusChangeListener(
-            object : ViewTreeObserver.OnWindowFocusChangeListener {
-                override fun onWindowFocusChanged(hasFocus: Boolean) {
-                    if (hasFocus) {
-                        this@showKeyboard.showTheKeyboardNow()
-                        viewTreeObserver.removeOnWindowFocusChangeListener(this)
-                    }
-                }
-            })
-    }
+    windowInsetsController?.show(WindowInsetsCompat.Type.ime())
 }
 
-fun View.hideKeyboard() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        windowInsetsController?.hide(WindowInsetsCompat.Type.ime())
-        return
-    }
+fun View.showKeyboard(window: Window) {
+    WindowInsetsControllerCompat(window, this).show(WindowInsetsCompat.Type.ime())
+}
 
-    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-    imm?.hideSoftInputFromWindow(windowToken, HIDE_NOT_ALWAYS)
+@RequiresApi(Build.VERSION_CODES.R)
+fun View.hideKeyboard() {
+    windowInsetsController?.hide(WindowInsetsCompat.Type.ime())
+}
+
+fun View.hideKeyboard(window: Window) {
+    WindowInsetsControllerCompat(window, this).hide(WindowInsetsCompat.Type.ime())
 }
 
 val View.keyboardIsVisible: Boolean
