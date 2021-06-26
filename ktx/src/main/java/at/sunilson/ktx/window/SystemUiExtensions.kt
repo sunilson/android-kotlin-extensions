@@ -15,6 +15,7 @@ fun Window.edgeToEdge(enabled: Boolean = true) {
     WindowCompat.setDecorFitsSystemWindows(this, !enabled)
 }
 
+@Deprecated("Use WindowCompat.setDecorFitsSystemWindows(window, false) instead and handle top and bottom insets")
 fun Window.drawBelowStatusBar(enabled: Boolean = true) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
         setDecorFitsSystemWindows(true)
@@ -29,6 +30,7 @@ fun Window.drawBelowStatusBar(enabled: Boolean = true) {
     }
 }
 
+@Deprecated("Use WindowCompat.setDecorFitsSystemWindows(window, false) instead and handle top and bottom insets")
 fun Window.drawBelowNavigationBar(enabled: Boolean = true) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
         setDecorFitsSystemWindows(true)
@@ -43,38 +45,10 @@ fun Window.drawBelowNavigationBar(enabled: Boolean = true) {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.M)
 fun Window.useLightStatusBarIcons(light: Boolean) {
-    decorView.run {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            windowInsetsController?.setSystemBarsAppearance(
-                if (light) 0 else APPEARANCE_LIGHT_STATUS_BARS,
-                APPEARANCE_LIGHT_STATUS_BARS
-            )
-        } else {
-            systemUiVisibility = if (!light) {
-                systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            } else {
-                systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
-            }
-        }
-    }
+    WindowInsetsControllerCompat(this, decorView).isAppearanceLightStatusBars = light
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun Window.useLightNavigationBarIcons(light: Boolean) {
-    decorView.run {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            windowInsetsController?.setSystemBarsAppearance(
-                if (light) 0 else APPEARANCE_LIGHT_NAVIGATION_BARS,
-                APPEARANCE_LIGHT_NAVIGATION_BARS
-            )
-        } else {
-            systemUiVisibility = if (!light) {
-                systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-            } else {
-                systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
-            }
-        }
-    }
+    WindowInsetsControllerCompat(this, decorView).isAppearanceLightNavigationBars = light
 }
